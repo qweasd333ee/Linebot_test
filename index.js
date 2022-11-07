@@ -22,6 +22,7 @@ updateRate()
 bot.on('message', event => {
   const text = event.message.text
   event.reply(text)
+  fetchFood(event)
   if (event.message.type !== 'text') return
 
   if (event.message.text === '共通課程') {
@@ -30,7 +31,7 @@ bot.on('message', event => {
     fetchAnime(event)
   } else if (event.message.text.startsWith('查匯率')) {
     event.reply(USDTWD.toString())
-  } else if (event.message.text === '查營養') fetchFood(event)
+  }
 })
 
 bot.listen('/', process.env.PORT || 3000, () => {

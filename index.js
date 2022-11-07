@@ -21,7 +21,8 @@ updateRate()
 
 bot.on('message', event => {
   if (event.message.type !== 'text') return
-  fetchFood(event)
+
+  if (event.message.text === 'text') fetchFood(event)
 
   if (event.message.text === '共通課程') {
     fetchCourse(event)

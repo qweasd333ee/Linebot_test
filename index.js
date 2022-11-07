@@ -3,6 +3,7 @@ import linebot from 'linebot'
 import { scheduleJob } from 'node-schedule'
 import fetchCourse from './commands/fetchCourse.js'
 import fetchAnime from './commands/fetchAnime.js'
+import fetchFood from './commands/fetchFood.js'
 import rateUpdate from './utils/rateUpdate.js'
 
 const bot = linebot({
@@ -28,6 +29,7 @@ bot.on('message', event => {
   } else if (event.message.text.startsWith('查匯率')) {
     event.reply(USDTWD.toString())
   }
+  event.reply(fetchFood)
 })
 
 bot.listen('/', process.env.PORT || 3000, () => {

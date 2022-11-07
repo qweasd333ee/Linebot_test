@@ -26,7 +26,7 @@ const main = async () => {
       responseType: 'stream'
     })
     const json = await readJSONfromZip(response.data)
-    for (let i = 0; i <= json.length; i++) {
+    for (let i = 0; i < json.length; i++) {
       const foodName = json[i]['樣品名稱']
       const analyze = json[i]['分析項']
       const Kcal = json[i]['每100克含量']

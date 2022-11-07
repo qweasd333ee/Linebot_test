@@ -28,8 +28,7 @@ bot.on('message', event => {
     fetchAnime(event)
   } else if (event.message.text.startsWith('查匯率')) {
     event.reply(USDTWD.toString())
-  }
-  event.reply(fetchFood)
+  } else if (event.message.type === '查營養') fetchFood(event)
 })
 
 bot.listen('/', process.env.PORT || 3000, () => {

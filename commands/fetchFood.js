@@ -20,7 +20,7 @@ const readJSONfromZip = (stream) => {
   })
 }
 export default async (event) => {
-  console.log(event)
+  const text = event.message.text
   try {
     const response = await axios.get('https://data.fda.gov.tw/opendata/exportDataList.do?method=ExportData&InfoId=20&logType=5', {
       responseType: 'stream'
@@ -30,8 +30,8 @@ export default async (event) => {
       const foodName = json[i]['樣品名稱']
       const analyze = json[i]['分析項']
       const Kcal = json[i]['每100克含量']
-      if (foodName === '' && analyze === '修正熱量') {
-        console.log(event.reply(Kcal + 'kcal'))
+      if (foodName === text && analyze === '修正熱量') {
+        event.reply(Kcal + 'kcal')
       }
     }
   } catch (error) {

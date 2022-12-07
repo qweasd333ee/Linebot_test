@@ -1,10 +1,13 @@
 import 'dotenv/config'
 import linebot from 'linebot'
 import { scheduleJob } from 'node-schedule'
+import express from 'express'
 import fetchCourse from './commands/fetchCourse.js'
 import fetchAnime from './commands/fetchAnime.js'
 import fetchFood from './commands/fetchFood.js'
 import rateUpdate from './utils/rateUpdate.js'
+
+const app = express()
 
 const bot = linebot({
   channelId: process.env.CHANNEL_ID,
@@ -33,6 +36,14 @@ bot.on('message', event => {
   }
 })
 
-bot.listen('/', process.env.PORT || 3000, () => {
+const linebotParser = bot.parser()
+
+app.post('/', linebotParser)
+
+app.get('/', (req, res) => {
+  res.status(200).send('ok')
+})
+
+app.listen('/', process.env.PORT || 3000, () => {
   console.log('機器人啟動')
 })
